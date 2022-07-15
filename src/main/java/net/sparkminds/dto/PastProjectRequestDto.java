@@ -28,6 +28,4 @@ public class PastProjectRequestDto {
     
     private String linkToLiveUrl;
     
-    private Long idApplication;
-    
 }

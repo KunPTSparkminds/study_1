@@ -1,8 +1,5 @@
 package net.sparkminds.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,11 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.sparkminds.entity.enumeration.Capacity;
 import net.sparkminds.entity.enumeration.Employment;
@@ -25,6 +23,7 @@ import net.sparkminds.entity.enumeration.Employment;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name="past_project")
 public class PastProject {
 	
@@ -34,33 +33,33 @@ public class PastProject {
 	private Long id;
 	
 	@NotBlank
-	@Column(name="past_project_name")
+	@Column(name="past_project_name", nullable = false)
 	private String pastProjectName;
 	
 	@NotBlank
-	@Column(name="employment_mode")
+	@Column(name="employment_mode", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Employment employment;
 	
 	@NotBlank
-	@Column(name="capacity")
+	@Column(name="capacity", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Capacity capacity;
 	
 	@NotBlank
-	@Column(name="duration")
+	@Column(name="duration", nullable = false)
 	private String duration;
 	
 	@NotBlank
-	@Column(name="start_year")
+	@Column(name="start_year", nullable = false)
 	private String startYear;
 	
 	@NotBlank
-	@Column(name="role")
+	@Column(name="role", nullable = false)
 	private String role;
 	
 	@NotBlank
-	@Column(name="team_size")
+	@Column(name="team_size", nullable = false)
 	private Long teamSize;
 	
 	
@@ -71,7 +70,7 @@ public class PastProject {
 	@Column(name="link_to_live_url")
 	private String linkToLiveUrl;
 	
-	@Column()
+	@Column(name = "is_deleted", nullable = false)
     private boolean deleted = false;
 	
 	@ManyToOne

@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import net.sparkminds.dto.ApplicationResponseDto;
 import net.sparkminds.entity.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {

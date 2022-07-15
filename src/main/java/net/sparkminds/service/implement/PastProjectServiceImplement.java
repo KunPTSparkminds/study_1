@@ -41,7 +41,7 @@ public class PastProjectServiceImplement implements PastProjectService {
                     .teamSize(entity.getTeamSize())
                     .linkToRepository(entity.getLinkToRepository())
                     .linkToLiveUrl(entity.getLinkToLiveUrl())
-                    .idApplication(entity.getApplication().getId())
+//                    .idApplication(entity.getApplication().getId())
                     .build();
         }).collect(Collectors.toList());
     }
@@ -60,7 +60,7 @@ public class PastProjectServiceImplement implements PastProjectService {
                     .teamSize(entity.getTeamSize())
                     .linkToRepository(entity.getLinkToRepository())
                     .linkToLiveUrl(entity.getLinkToLiveUrl())
-                    .idApplication(entity.getApplication().getId())
+//                    .idApplication(entity.getApplication().getId())
                     .build();
         }).collect(Collectors.toList());
     }
@@ -69,7 +69,7 @@ public class PastProjectServiceImplement implements PastProjectService {
     @Transactional
     @Override
     public PastProjectResponseDto createPassProject(PastProjectRequestDto pastProjectRequestDto) {
-        Application application = applicationRepsonsitory.findById(pastProjectRequestDto.getIdApplication()).orElse(null);
+//        Application application = applicationRepsonsitory.findById(pastProjectRequestDto.getIdApplication()).orElse(null);
         PastProject passProject = new PastProject();
         passProject.setPastProjectName(pastProjectRequestDto.getPastProjectName());
         passProject.setEmployment(pastProjectRequestDto.getEmployment());
@@ -80,7 +80,7 @@ public class PastProjectServiceImplement implements PastProjectService {
         passProject.setTeamSize(pastProjectRequestDto.getTeamSize());
         passProject.setLinkToRepository(pastProjectRequestDto.getLinkToRepository());
         passProject.setLinkToLiveUrl(pastProjectRequestDto.getLinkToLiveUrl());
-        passProject.setApplication(application);
+//        passProject.setApplication(application);
         passProjectRepository.save(passProject);
         return PastProjectResponseDto.builder()
                 .pastProjectName(passProject.getPastProjectName())
@@ -92,7 +92,7 @@ public class PastProjectServiceImplement implements PastProjectService {
                 .teamSize(passProject.getTeamSize())
                 .linkToRepository(passProject.getLinkToRepository())
                 .linkToLiveUrl(passProject.getLinkToLiveUrl())
-                .idApplication(passProject.getApplication().getId())
+//                .idApplication(passProject.getApplication().getId())
                 .build();
     }
 

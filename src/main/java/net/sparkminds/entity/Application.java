@@ -1,5 +1,6 @@
 package net.sparkminds.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,12 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import net.sparkminds.dto.PastProjectRequestDto;
 
 @Entity
 @Data
@@ -28,23 +29,24 @@ public class Application {
 	private Long id;
 
 	@NotBlank
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 
 	@NotBlank
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@NotBlank
-	@Column(name = "github")
+	@Column(name = "github", nullable = false)
 	private String github;
 
 	@NotBlank
 	@Column()
 	@OneToMany(mappedBy="application", cascade = CascadeType.ALL)
-	private List<PastProject> pastProject;
+	@Valid
+	private List<PastProject> pastProjects;
 	
-	@Column()
+	@Column(name = "is_deleted", nullable = false)
 	@NotNull
 	private boolean deleted = false;
 
@@ -54,4 +56,13 @@ public class Application {
 //				+ ", applicationPastProject=" + applicationPastProject + "]";
 //	}
 
+	public void addProject(PastProject project) {
+	    if (pastProjects == null) pastProjects = new ArrayList<>();
+	    pastProjects.add(project);
+	    project.setApplication(this);
+	}
+	
+	public void addProjects(List<PastProject> projects) {
+	    projects.forEach(this::addProject);
+	}
 }

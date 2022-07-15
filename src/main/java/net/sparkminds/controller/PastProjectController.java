@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import net.sparkminds.dto.ApplicationRequestDto;
 import net.sparkminds.dto.PastProjectRequestDto;
 import net.sparkminds.dto.PastProjectResponseDto;
-import net.sparkminds.service.ApplicationService;
 import net.sparkminds.service.PastProjectService;
 
 @RestController

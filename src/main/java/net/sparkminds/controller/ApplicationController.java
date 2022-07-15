@@ -1,13 +1,13 @@
 package net.sparkminds.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +24,6 @@ import com.lowagie.text.DocumentException;
 import lombok.RequiredArgsConstructor;
 import net.sparkminds.dto.ApplicationRequestDto;
 import net.sparkminds.dto.ApplicationResponseDto;
-import net.sparkminds.entity.Application;
 import net.sparkminds.service.ApplicationService;
 import net.sparkminds.utils.PDFGenerator;
 
@@ -46,13 +45,13 @@ public class ApplicationController {
     };
 	
 	@PostMapping("/add-new")
-    public ResponseEntity<?> postNewApplication(@RequestBody ApplicationRequestDto applicationRequestDto) {
+    public ResponseEntity<?> postNewApplication(@Valid @RequestBody ApplicationRequestDto applicationRequestDto) {
        applicationService.createApplication(applicationRequestDto);
-       return ResponseEntity.ok().build();
+       return ResponseEntity.ok().body(applicationRequestDto);
     };
 	
 	@PostMapping("/add-current")
-    public ResponseEntity<?> postCurrentApplication(@RequestBody ApplicationRequestDto applicationRequestDto) {
+    public ResponseEntity<?> postCurrentApplication(@Valid @RequestBody ApplicationRequestDto applicationRequestDto) {
        applicationService.deleteApplicationWithEmail(applicationRequestDto.getEmail());
        applicationService.createApplication(applicationRequestDto);
        return ResponseEntity.ok().build();
