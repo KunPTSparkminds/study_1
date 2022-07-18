@@ -4,11 +4,10 @@ import java.util.List;
 
 import net.sparkminds.dto.ApplicationRequestDto;
 import net.sparkminds.dto.ApplicationResponseDto;
-import net.sparkminds.entity.Application;
 
 public interface ApplicationService {
     
-    List<ApplicationResponseDto> getApplicationById(Long id);
+    ApplicationResponseDto getApplicationById(Long id);
 	
 	List<ApplicationResponseDto> getAllApplication();
 	

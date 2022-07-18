@@ -30,5 +30,4 @@ public class PastProjectResponseDto {
 	
 	private String linkToLiveUrl;
 	
-//	private Long idApplication;
 }

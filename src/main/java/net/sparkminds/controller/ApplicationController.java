@@ -40,7 +40,7 @@ public class ApplicationController {
 	};
 	
 	@GetMapping("/{id}")
-    public ResponseEntity<List<ApplicationResponseDto>> getApplicationById(@PathVariable("id") Long id) {
+    public ResponseEntity<ApplicationResponseDto> getApplicationById(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(applicationService.getApplicationById(id));
     };
 	
@@ -89,23 +89,23 @@ public class ApplicationController {
 		
 	}
 	
-	@GetMapping("/pdf/{id}")
-    public void generatePdfById(HttpServletResponse response, @PathVariable("id") Long id) throws DocumentException, IOException {
-        
-        response.setContentType("application/pdf");
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
-        String currentDateTime = dateFormat.format(new Date());
-        String headerkey = "Content-Disposition";
-        String headervalue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
-        response.setHeader(headerkey, headervalue);
-        
-        List<ApplicationResponseDto> applications = applicationService.getApplicationById(id);
-        
-        PDFGenerator generator = new PDFGenerator();
-        generator.setApplications(applications);
-        generator.generate(response);
-        
-    }
+//	@GetMapping("/pdf/{id}")
+//    public void generatePdfById(HttpServletResponse response, @PathVariable("id") Long id) throws DocumentException, IOException {
+//        
+//        response.setContentType("application/pdf");
+//        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
+//        String currentDateTime = dateFormat.format(new Date());
+//        String headerkey = "Content-Disposition";
+//        String headervalue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+//        response.setHeader(headerkey, headervalue);
+//        
+//        ApplicationResponseDto applications = applicationService.getApplicationById(id);
+//        
+//        PDFGenerator generator = new PDFGenerator();
+//        generator.setApplications(applications);
+//        generator.generate(response);
+//        
+//    }
 	
 	
 

@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,7 @@ import net.sparkminds.entity.enumeration.Employment;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="past_project")
+@Table(name="t_past_project")
 public class PastProject {
 	
 	@Column

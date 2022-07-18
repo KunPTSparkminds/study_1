@@ -16,11 +16,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import net.sparkminds.dto.PastProjectRequestDto;
 
 @Entity
 @Data
-@Table(name = "application")
+@Table(name = "t_application")
 public class Application {
 
 	@Column
