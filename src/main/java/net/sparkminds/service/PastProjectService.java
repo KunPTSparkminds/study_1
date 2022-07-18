@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.sparkminds.dto.PastProjectRequestDto;
 import net.sparkminds.dto.PastProjectResponseDto;
-import net.sparkminds.entity.PastProject;
 
 public interface PastProjectService {
     

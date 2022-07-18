@@ -47,6 +47,7 @@ public class ApplicationController {
 	@PostMapping("/add-new")
     public ResponseEntity<?> postNewApplication(@Valid @RequestBody ApplicationRequestDto applicationRequestDto) {
        applicationService.createApplication(applicationRequestDto);
+       
        return ResponseEntity.ok().body(applicationRequestDto);
     };
 	

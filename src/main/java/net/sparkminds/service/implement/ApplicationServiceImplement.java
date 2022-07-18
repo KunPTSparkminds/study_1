@@ -119,6 +119,7 @@ public class ApplicationServiceImplement implements ApplicationService {
     @Transactional
     @Override
     public ApplicationResponseDto createApplication(ApplicationRequestDto applicationRequestDto) {
+        if (applicationRepsonsitory.existsByEmail(applicationRequestDto.getEmail())) return null;
         List<PastProject> projects = applicationRequestDto
                 .getPastProject()
                 .stream()
