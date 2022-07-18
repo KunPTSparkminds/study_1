@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import net.sparkminds.Repository.ApplicationRepository;
-import net.sparkminds.Repository.PastProjectRepository;
 import net.sparkminds.dto.PastProjectRequestDto;
 import net.sparkminds.dto.PastProjectResponseDto;
-import net.sparkminds.entity.Application;
 import net.sparkminds.entity.PastProject;
+import net.sparkminds.repository.PastProjectRepository;
 import net.sparkminds.service.PastProjectService;
 
 @Service
@@ -23,8 +21,7 @@ public class PastProjectServiceImplement implements PastProjectService {
     
     @Autowired
     private final PastProjectRepository passProjectRepository;
-    @Autowired
-    private final ApplicationRepository applicationRepsonsitory;
+   
     
     
     @Override

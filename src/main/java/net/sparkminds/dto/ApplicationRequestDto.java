@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.Builder;
 import lombok.Data;
-import net.sparkminds.entity.PastProject;
 
 @Builder
 @Data

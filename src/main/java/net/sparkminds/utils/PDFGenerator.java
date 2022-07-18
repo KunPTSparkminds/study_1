@@ -1,15 +1,10 @@
 package net.sparkminds.utils;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.client.HttpServerErrorException;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -26,8 +21,6 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import lombok.Data;
 import net.sparkminds.dto.ApplicationResponseDto;
-import net.sparkminds.dto.PastProjectResponseDto;
-import net.sparkminds.entity.Application;
 
 @Data
 public class PDFGenerator {
