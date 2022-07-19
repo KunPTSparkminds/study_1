@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import net.sparkminds.entity.enumeration.Capacity;
 import net.sparkminds.entity.enumeration.Employment;
 
-@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

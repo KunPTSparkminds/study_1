@@ -14,16 +14,14 @@ import net.sparkminds.service.LoginService;
 @RequestMapping("/api/login")
 @RequiredArgsConstructor
 public class LoginController {
-    
-    
+
     private final LoginService loginService;
-    
+
     @PostMapping
     public ResponseEntity<?> Login(@RequestBody LoginRequestDto loginRequestDto) {
-        
+
         loginService.login(loginRequestDto);
-        
-//        return ResponseEntity.noContent().build();
+
         return ResponseEntity.ok(loginService.login(loginRequestDto));
     }
 

@@ -19,8 +19,6 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private ReviewerRepository reviewerRepository;
 
-//    @Autowired
-//    private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -31,11 +29,5 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), new ArrayList<>());
     }
 
-//    public DAOUser save(UserDTO user) {
-//        DAOUser newUser = new DAOUser();
-//        newUser.setUsername(user.getUsername());
-//        newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-//        return userDao.save(newUser);
-//    }
 
 }

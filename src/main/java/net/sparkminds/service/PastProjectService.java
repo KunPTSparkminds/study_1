@@ -9,7 +9,7 @@ public interface PastProjectService {
     
     List<PastProjectResponseDto> getAllPastProject();
     
-    List<PastProjectResponseDto> getPastProjectById(Long id);
+    List<PastProjectResponseDto> getPastProjectByApplicationId(Long id);
     
     PastProjectResponseDto createPassProject(PastProjectRequestDto passProjectRequestDto);
 

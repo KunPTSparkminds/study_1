@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,26 +28,24 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@NotBlank
+
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@NotBlank
+
 	@Column(name = "github", nullable = false)
 	private String github;
 
-	@NotBlank
+
 	@Column()
 	@OneToMany(mappedBy="application", cascade = CascadeType.ALL)
-	@Valid
 	private List<PastProject> pastProjects;
 	
 	@Column(name = "is_deleted", nullable = false)
-	@NotNull
 	private boolean deleted = false;
 
 //	@Override

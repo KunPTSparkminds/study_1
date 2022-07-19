@@ -1,6 +1,7 @@
 package net.sparkminds.service.implement;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,11 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.sparkminds.dto.ApplicationRequestDto;
 import net.sparkminds.dto.ApplicationResponseDto;
-import net.sparkminds.dto.PastProjectResponseDto;
 import net.sparkminds.entity.Application;
 import net.sparkminds.entity.PastProject;
 import net.sparkminds.repository.ApplicationRepository;
+import net.sparkminds.repository.PastProjectRepository;
 import net.sparkminds.service.ApplicationService;
+import net.sparkminds.service.mapper.ApplicationMapper;
 import net.sparkminds.service.mapper.PastProjectMapper;
 
 @Service
@@ -24,40 +26,24 @@ import net.sparkminds.service.mapper.PastProjectMapper;
 public class ApplicationServiceImplement implements ApplicationService {
 
     private final ApplicationRepository applicationRepsonsitory;
-
     
+    private final PastProjectRepository pastProjectRepository; 
+
     private final PastProjectMapper projectMapper;
+    
+    private final ApplicationMapper applicationMapper;
+    
 
     @Override
-    public List<ApplicationResponseDto> getApplicationById(Long id) {
-        return applicationRepsonsitory.findByIdAndDeletedFalse(id).stream().map(entity -> {
-            List<PastProjectResponseDto> pasProjects = entity.getPastProjects().stream().map(passPr -> {
-                return PastProjectResponseDto.builder().pastProjectName(passPr.getPastProjectName())
-                        .employment(passPr.getEmployment()).capacity(passPr.getCapacity())
-                        .duration(passPr.getDuration()).startYear(passPr.getStartYear()).role(passPr.getRole())
-                        .teamSize(passPr.getTeamSize()).linkToRepository(passPr.getLinkToRepository())
-                        .linkToLiveUrl(passPr.getLinkToLiveUrl())
-                        .build();
-            }).collect(Collectors.toList());
-            return ApplicationResponseDto.builder().email(entity.getEmail()).github(entity.getGithub())
-                    .name(entity.getName()).pastProjects(pasProjects).build();
-        }).collect(Collectors.toList());
+    public Optional<ApplicationResponseDto> getApplicationById(Long id) {
+        return applicationRepsonsitory.findByIdAndDeletedFalse(id).map(applicationMapper::entityToResponse);
+        
     }
 
     @Override
     public List<ApplicationResponseDto> getAllApplication() {
-        return applicationRepsonsitory.findAll().stream().map(entity -> {
-            List<PastProjectResponseDto> pasProjects = entity.getPastProjects().stream().map(passPr -> {
-                return PastProjectResponseDto.builder().pastProjectName(passPr.getPastProjectName())
-                        .employment(passPr.getEmployment()).capacity(passPr.getCapacity())
-                        .duration(passPr.getDuration()).startYear(passPr.getStartYear()).role(passPr.getRole())
-                        .teamSize(passPr.getTeamSize()).linkToRepository(passPr.getLinkToRepository())
-                        .linkToLiveUrl(passPr.getLinkToLiveUrl())
-                        .build();
-            }).collect(Collectors.toList());
-            return ApplicationResponseDto.builder().email(entity.getEmail()).name(entity.getName())
-                    .github(entity.getGithub()).pastProjects(pasProjects).build();
-        }).collect(Collectors.toList());
+        return applicationRepsonsitory.findAllByDeletedFalse().stream().map(applicationMapper::entityToResponse)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -71,8 +57,8 @@ public class ApplicationServiceImplement implements ApplicationService {
         application.setName(applicationRequestDto.getName());
         applicationRepsonsitory.save(application);
 
-        return ApplicationResponseDto.builder().email(application.getEmail()).github(application.getGithub())
-                .name(application.getName()).build();
+        return applicationMapper.entityToResponse(application);
+
     }
 
     @Transactional
@@ -81,6 +67,11 @@ public class ApplicationServiceImplement implements ApplicationService {
         Application applicationDelete = applicationRepsonsitory.findByEmailAndDeletedFalse(email)
                 .orElseThrow(() -> new EntityNotFoundException("Application is not exist"));
         applicationDelete.setDeleted(true);
+        List<PastProject> pastProjects = pastProjectRepository.findAllByApplicationId(applicationDelete.getId());
+        pastProjects.forEach(pasrPr -> {
+            pasrPr.setDeleted(true);
+        });
+        pastProjectRepository.saveAll(pastProjects);
         applicationRepsonsitory.save(applicationDelete);
     }
 
@@ -90,6 +81,11 @@ public class ApplicationServiceImplement implements ApplicationService {
         Application applicationDelete = applicationRepsonsitory.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Application is not exist"));
         applicationDelete.setDeleted(true);
+        List<PastProject> pastProjects = pastProjectRepository.findAllByApplicationId(id);
+        pastProjects.forEach(pasrPr -> {
+            pasrPr.setDeleted(true);
+        });
+        pastProjectRepository.saveAll(pastProjects);
         applicationRepsonsitory.save(applicationDelete);
     }
 
@@ -97,11 +93,11 @@ public class ApplicationServiceImplement implements ApplicationService {
     @Transactional
     @Override
     public ApplicationResponseDto createApplication(ApplicationRequestDto applicationRequestDto) {
-        if (applicationRepsonsitory.existsByEmail(applicationRequestDto.getEmail())) return null;
+        if (applicationRepsonsitory.existsByEmailAndDeletedFalse(applicationRequestDto.getEmail())) return null;
         List<PastProject> projects = applicationRequestDto
                 .getPastProject()
                 .stream()
-                .map(projectMapper::toEntity)
+                .map(projectMapper::requestToEntity)
                 .collect(Collectors.toList());
         
         Application newApplication = new Application();
@@ -111,13 +107,9 @@ public class ApplicationServiceImplement implements ApplicationService {
         newApplication.setDeleted(false);
         newApplication.addProjects(projects);
 
-        newApplication = applicationRepsonsitory.save(newApplication);
+        applicationRepsonsitory.save(newApplication);
+        
+        return applicationMapper.entityToResponse(newApplication);
 
-        return ApplicationResponseDto
-                .builder()
-                .email(newApplication.getEmail())
-                .github(newApplication.getGithub())
-                .name(newApplication.getName())
-                .build();
     }
 }

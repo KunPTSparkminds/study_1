@@ -20,7 +20,6 @@ public class ReviewerMapper {
         reviewer.setName(dto.getName());
         reviewer.setEmail(dto.getEmail());
         reviewer.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
-//        reviewer.setPassword(dto.getPassword());
         reviewer.setPicture(dto.getPicture());
         return reviewer;
     }

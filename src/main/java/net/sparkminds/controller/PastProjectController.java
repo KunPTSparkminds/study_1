@@ -19,22 +19,22 @@ import net.sparkminds.service.PastProjectService;
 @RequestMapping("api/pass-project")
 @RequiredArgsConstructor
 public class PastProjectController {
-    
+
     private final PastProjectService pastProjectService;
-    
+
     @GetMapping
     public ResponseEntity<List<PastProjectResponseDto>> getPastProject() {
         return ResponseEntity.ok().body(pastProjectService.getAllPastProject());
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<List<PastProjectResponseDto>> getPastProject(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(pastProjectService.getPastProjectById(id));
+    public ResponseEntity<?> getPastProject(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(pastProjectService.getPastProjectByApplicationId(id));
     }
-    
+
     @PostMapping("/add")
     public ResponseEntity<?> postNewPastProject(@RequestBody PastProjectRequestDto pastProjectRequestDto) {
         pastProjectService.createPassProject(pastProjectRequestDto);
-       return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     };
 }

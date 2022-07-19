@@ -27,6 +27,10 @@ public class PDFGenerator {
 	
 	private List<ApplicationResponseDto> applications;
 	
+	
+	
+	private ApplicationResponseDto application;
+	
 	public void generate(HttpServletResponse response) throws DocumentException, IOException {
 
 		// Creating the Object of Document
@@ -43,14 +47,7 @@ public class PDFGenerator {
 		Font fontTiltle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
 		fontTiltle.setSize(20);
 
-		// Creating paragraph
-		Paragraph paragraph = new Paragraph("List Of Application", fontTiltle);
-
-		// Aligning the paragraph in document
-		paragraph.setAlignment(Paragraph.ALIGN_CENTER);
-
-		// Adding the created paragraph in document
-		document.add(paragraph);
+		
 
 //		String imageFile = "C:/itextExamples/javafxLogo.jpg";
 //		ImageData data = ImageDataFactory.create(imageFile);
@@ -90,33 +87,76 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("PastProject", font));
 		table.addCell(cell);
 
+		String imageUrl = "https://avatars.githubusercontent.com/";
 		// Iterating over the list of students
-		for (ApplicationResponseDto application : applications) {
-			// Adding student id
-//			table.addCell(String.valueOf(application.getId()));
-		    String imageUrl = "https://avatars.githubusercontent.com/" + application.getGithub();
-		    Image image = Image.getInstance(imageUrl);
-		    table.addCell(image);
-			table.addCell(application.getName());
-			table.addCell(application.getEmail());
-			table.addCell(application.getGithub());
-			
-			List<String> project = application.getPastProjects().stream().map(entity -> {
-				return String.format("Name:  %s \nEmployment: %s \nCapacity: %s \nDuration: %s \nStartYear: %s \nRole: %s \nTeamSize: %s \nLinkToRepository: %s \nLinkToLiveUrl: %s \n", 
-				        entity.getPastProjectName(),entity.getEmployment(), entity.getCapacity(), entity.getDuration(),
-				        entity.getStartYear(), entity.getRole(), entity.getTeamSize(), entity.getLinkToRepository(), entity.getLinkToLiveUrl());
-            }).collect(Collectors.toList());
-			String projects = String.join(" \n", project);
-            table.addCell(projects); 
-			};
+		
+		if(applications != null) {
+		 // Creating paragraph
+	        Paragraph paragraph = new Paragraph("List Of Applicant", fontTiltle);
+
+	        // Aligning the paragraph in document
+	        paragraph.setAlignment(Paragraph.ALIGN_CENTER);
+
+	        // Adding the created paragraph in document
+	        document.add(paragraph);
+		    for (ApplicationResponseDto application : applications) {
+	            // Adding student id
+//	          table.addCell(String.valueOf(application.getId()));
+	            
+	            Image image = Image.getInstance(imageUrl + application.getGithub());
+	            table.addCell(image);
+	            table.addCell(application.getName());
+	            table.addCell(application.getEmail());
+	            table.addCell(application.getGithub());
+
+	            List<String> project = application.getPastProjects().stream().map(entity -> {
+	                return String.format(
+	                        "Name:  %s \nEmployment: %s \nCapacity: %s \nDuration: %s \nStartYear: %s \nRole: %s \nTeamSize: %s \nLinkToRepository: %s \nLinkToLiveUrl: %s \n",
+	                        entity.getPastProjectName(), entity.getEmployment(), entity.getCapacity(), entity.getDuration(),
+	                        entity.getStartYear(), entity.getRole(), entity.getTeamSize(), entity.getLinkToRepository(),
+	                        entity.getLinkToLiveUrl());
+	            }).collect(Collectors.toList());
+	            String projects = String.join(" \n", project);
+	            table.addCell(projects);
+	        };
+		}
+        
+        
+		if(application != null) {
+		    
+		    // Creating paragraph
+	        Paragraph paragraph = new Paragraph("Applicant", fontTiltle);
+
+	        // Aligning the paragraph in document
+	        paragraph.setAlignment(Paragraph.ALIGN_CENTER);
+
+	        // Adding the created paragraph in document
+	        document.add(paragraph);
+		    
+		    Image image = Image.getInstance(imageUrl + application.getGithub());
+	        table.addCell(image);
+	        table.addCell(application.getName());
+	        table.addCell(application.getEmail());
+	        table.addCell(application.getGithub());
+
+	        List<String> project = application.getPastProjects().stream().map(entity -> {
+	            return String.format(
+	                    "Name:  %s \nEmployment: %s \nCapacity: %s \nDuration: %s \nStartYear: %s \nRole: %s \nTeamSize: %s \nLinkToRepository: %s \nLinkToLiveUrl: %s \n",
+	                    entity.getPastProjectName(), entity.getEmployment(), entity.getCapacity(), entity.getDuration(),
+	                    entity.getStartYear(), entity.getRole(), entity.getTeamSize(), entity.getLinkToRepository(),
+	                    entity.getLinkToLiveUrl());
+	        }).collect(Collectors.toList());
+	        String projects = String.join(" \n", project);
+	        table.addCell(projects);
+		}
+        
+        
+        
+        
+        
                     
             	
 			
-
-			
-			 
-			
-		
 		// Adding the created table to document
 		document.add(table);
 

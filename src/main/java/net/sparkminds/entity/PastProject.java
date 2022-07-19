@@ -31,33 +31,33 @@ public class PastProject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	
 	@Column(name="past_project_name", nullable = false)
 	private String pastProjectName;
 	
-	@NotBlank
+	
 	@Column(name="employment_mode", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Employment employment;
 	
-	@NotBlank
+	
 	@Column(name="capacity", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Capacity capacity;
 	
-	@NotBlank
+	
 	@Column(name="duration", nullable = false)
 	private String duration;
 	
-	@NotBlank
+	
 	@Column(name="start_year", nullable = false)
 	private String startYear;
 	
-	@NotBlank
+	
 	@Column(name="role", nullable = false)
 	private String role;
 	
-	@NotBlank
+	
 	@Column(name="team_size", nullable = false)
 	private Long teamSize;
 	

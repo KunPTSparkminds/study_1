@@ -13,6 +13,8 @@ import net.sparkminds.dto.PastProjectResponseDto;
 import net.sparkminds.entity.PastProject;
 import net.sparkminds.repository.PastProjectRepository;
 import net.sparkminds.service.PastProjectService;
+import net.sparkminds.service.mapper.ApplicationMapper;
+import net.sparkminds.service.mapper.PastProjectMapper;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,45 +23,25 @@ public class PastProjectServiceImplement implements PastProjectService {
     
     @Autowired
     private final PastProjectRepository passProjectRepository;
-   
-    
+
+    private final PastProjectMapper projectMapper;
+
+    private final ApplicationMapper applicationMapper;
     
     @Override
     public List<PastProjectResponseDto> getAllPastProject() {
-        return passProjectRepository.findAll().stream().map(entity -> {
-            return PastProjectResponseDto
-                    .builder()
-                    .pastProjectName(entity.getPastProjectName())
-                    .employment(entity.getEmployment())
-                    .capacity(entity.getCapacity())
-                    .duration(entity.getDuration())
-                    .startYear(entity.getStartYear())
-                    .role(entity.getRole())
-                    .teamSize(entity.getTeamSize())
-                    .linkToRepository(entity.getLinkToRepository())
-                    .linkToLiveUrl(entity.getLinkToLiveUrl())
-//                    .idApplication(entity.getApplication().getId())
-                    .build();
-        }).collect(Collectors.toList());
+        
+        return passProjectRepository.findAll().stream().map(projectMapper::entityToResponse)
+                .collect(Collectors.toList());
     }
     
     @Override
-    public List<PastProjectResponseDto> getPastProjectById(Long id) {
-        return passProjectRepository.findById(id).stream().map(entity -> {
-            return PastProjectResponseDto
-                    .builder()
-                    .pastProjectName(entity.getPastProjectName())
-                    .employment(entity.getEmployment())
-                    .capacity(entity.getCapacity())
-                    .duration(entity.getDuration())
-                    .startYear(entity.getStartYear())
-                    .role(entity.getRole())
-                    .teamSize(entity.getTeamSize())
-                    .linkToRepository(entity.getLinkToRepository())
-                    .linkToLiveUrl(entity.getLinkToLiveUrl())
-//                    .idApplication(entity.getApplication().getId())
-                    .build();
-        }).collect(Collectors.toList());
+    public List<PastProjectResponseDto> getPastProjectByApplicationId(Long id) {
+        
+        return passProjectRepository.findAllByApplicationId(id).stream().map(projectMapper::entityToResponse)
+                .collect(Collectors.toList());
+        
+//        return projectMapper.entityToResponse(passProjectRepository.findAllByApplicationId(id).get());
     }
     
 
@@ -68,29 +50,13 @@ public class PastProjectServiceImplement implements PastProjectService {
     public PastProjectResponseDto createPassProject(PastProjectRequestDto pastProjectRequestDto) {
 //        Application application = applicationRepsonsitory.findById(pastProjectRequestDto.getIdApplication()).orElse(null);
         PastProject passProject = new PastProject();
-        passProject.setPastProjectName(pastProjectRequestDto.getPastProjectName());
-        passProject.setEmployment(pastProjectRequestDto.getEmployment());
-        passProject.setCapacity(pastProjectRequestDto.getCapacity());
-        passProject.setDuration(pastProjectRequestDto.getDuration());
-        passProject.setStartYear(pastProjectRequestDto.getStartYear());
-        passProject.setRole(pastProjectRequestDto.getRole());
-        passProject.setTeamSize(pastProjectRequestDto.getTeamSize());
-        passProject.setLinkToRepository(pastProjectRequestDto.getLinkToRepository());
-        passProject.setLinkToLiveUrl(pastProjectRequestDto.getLinkToLiveUrl());
-//        passProject.setApplication(application);
+        
+        passProject = projectMapper.requestToEntity(pastProjectRequestDto);
+        
+
         passProjectRepository.save(passProject);
-        return PastProjectResponseDto.builder()
-                .pastProjectName(passProject.getPastProjectName())
-                .employment(passProject.getEmployment())
-                .capacity(passProject.getCapacity())
-                .duration(passProject.getDuration())
-                .startYear(passProject.getStartYear())
-                .role(passProject.getRole())
-                .teamSize(passProject.getTeamSize())
-                .linkToRepository(passProject.getLinkToRepository())
-                .linkToLiveUrl(passProject.getLinkToLiveUrl())
-//                .idApplication(passProject.getApplication().getId())
-                .build();
+        return projectMapper.entityToResponse(passProject);
+
     }
 
 

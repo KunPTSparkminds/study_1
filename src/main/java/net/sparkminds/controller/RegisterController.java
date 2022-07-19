@@ -17,13 +17,13 @@ import net.sparkminds.service.RegisterService;
 public class RegisterController {
 
     private final RegisterService registerService;
-    
+
     @PostMapping
     public ResponseEntity<?> Register(@RequestBody RegisterRequestDto registerRequestDto) {
-        
+
         Reviewer reviewer = registerService.register(registerRequestDto);
-        
+
         return ResponseEntity.ok(reviewer.getEmail());
-                
+
     }
 }
