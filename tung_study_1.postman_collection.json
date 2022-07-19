@@ -1,16 +1,19 @@
 {
 	"info": {
-		"_postman_id": "385c80ba-ff9b-4378-ba59-648100ed2169",
+		"_postman_id": "217917c2-06d1-46e3-bb44-26e497a2e299",
 		"name": "tung_study_1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20916233"
+		"_exporter_id": "16768328"
 	},
 	"item": [
 		{
 			"name": "GetAllApplication",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -18,15 +21,39 @@
 			"name": "GetApplicationById",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "AddNewApplication",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"1\",\r\n    \"name\": \"Thanh Tung 21\",\r\n    \"github\": \"linkgit21\",\r\n    \"pastProject\": [\r\n        {\r\n            \"pastProjectName\": \"project4\",\r\n            \"employment\": \"FREELANCE\",\r\n            \"capacity\": \"PARTTIME\",\r\n            \"duration\": \"1tuan\",\r\n            \"startYear\": \"2021\",\r\n            \"role\": \"member\",\r\n            \"teamSize\": 1,\r\n            \"linkToRepository\": \"linkToRepository12\",\r\n            \"linkToLiveUrl\": \"linkToLiveUrl12\"\r\n        },\r\n        {\r\n            \"pastProjectName\": \"project7\",\r\n            \"employment\": \"FREELANCE\",\r\n            \"capacity\": \"PARTTIME\",\r\n            \"duration\": \"1tuan\",\r\n            \"startYear\": \"2010\",\r\n            \"role\": \"membe11r\",\r\n            \"teamSize\": 4,\r\n            \"linkToRepository\": \"linkToRepository1533\",\r\n            \"linkToLiveUrl\": \"linkToLiveUrl1533\"\r\n        }\r\n    ]\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/applications/add-new",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"add-new"
+					]
+				}
 			},
 			"response": []
 		},
@@ -34,7 +61,10 @@
 			"name": "UpdateandDeleteCurrentApplication",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -42,7 +72,10 @@
 			"name": "UpdateApplicationById",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -50,7 +83,10 @@
 			"name": "DeleteApplicationById",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -58,7 +94,10 @@
 			"name": "ExportPDF",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -66,15 +105,10 @@
 			"name": "ExportPDFById",
 			"request": {
 				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "AddPastProject",
-			"request": {
-				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -82,12 +116,34 @@
 			"name": "GetAllPastProject",
 			"request": {
 				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPastProjectByApplicationId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "GET",
 				"header": []
 			},
 			"response": []
 		},
 		{
-			"name": "GetPastProjectById",
+			"name": "Login",
 			"request": {
 				"method": "GET",
 				"header": []
