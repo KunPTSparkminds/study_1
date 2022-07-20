@@ -22,23 +22,23 @@ public class Reviewer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-    @NotBlank
+    
     @Column(name = "name", nullable = false)
     private String name;
     
-    @NotBlank
+   
     @Column(name = "email", nullable = false)
     private String email;
     
-    @NotBlank
+    
     @Column(name = "password", nullable = false)
     private String password;
     
-    @NotNull
+    
     @Column(name = "picture", nullable = false)
     private String picture;
     
     @Column(name = "is_deleted", nullable = false)
-	@NotNull
+	
 	private boolean deleted = false;
 }

@@ -1,5 +1,7 @@
 package net.sparkminds.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +21,7 @@ public class RegisterController {
     private final RegisterService registerService;
 
     @PostMapping
-    public ResponseEntity<?> Register(@RequestBody RegisterRequestDto registerRequestDto) {
+    public ResponseEntity<?> Register(@RequestBody @Valid RegisterRequestDto registerRequestDto) {
 
         Reviewer reviewer = registerService.register(registerRequestDto);
 
