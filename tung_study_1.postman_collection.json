@@ -9,10 +9,28 @@
 		{
 			"name": "GetAllApplication",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNDAzNzEsImlhdCI6MTY1ODIyMjM3MX0.183kFa_HErSD0XC6NryhenAo-xnHTg4LVQJqQilCa0baR8x9xaYWlUOvk_v96rHdln1-1FVAyxgBVTyEAWOwVA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications"
+					]
 				}
 			},
 			"response": []
@@ -20,10 +38,29 @@
 		{
 			"name": "GetApplicationById",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyMzg5MzUsImlhdCI6MTY1ODIyMDkzNX0.LDBZ0cAaUqAzmNNJ9Xymr9VnOljC2ejq1ObC1EvtooRzu33E3mPHt0kP1yse5aGgpB3Q8ohdgUzxGyZOoX5nbA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -60,10 +97,38 @@
 		{
 			"name": "UpdateandDeleteCurrentApplication",
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNjYyNjEsImlhdCI6MTY1ODI0ODI2MX0.tjVOXaGd7v1BT0YZzNyLEC61fKpxYzq7s_JUHpN9oMBCzdGmChtpDSbhgen5ffyvy8BzAjadAfVcpr-43-PeLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"11111\",\r\n    \"name\": \"Thanh Tung tao lai lan nua\",\r\n    \"github\": \"linkgit21211111\",\r\n    \"pastProject\": [\r\n        {\r\n            \"pastProjectName\": \"project15moi\",\r\n            \"employment\": \"FREELANCE\",\r\n            \"capacity\": \"PARTTIME\",\r\n            \"duration\": \"2tuan\",\r\n            \"startYear\": \"2030\",\r\n            \"role\": \"member\",\r\n            \"teamSize\": 7,\r\n            \"linkToRepository\": \"linkToRepository12\",\r\n            \"linkToLiveUrl\": \"linkToLiveUrl12\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/add-current",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"add-current"
+					]
 				}
 			},
 			"response": []
@@ -71,10 +136,38 @@
 		{
 			"name": "UpdateApplicationById",
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNDAzNzEsImlhdCI6MTY1ODIyMjM3MX0.183kFa_HErSD0XC6NryhenAo-xnHTg4LVQJqQilCa0baR8x9xaYWlUOvk_v96rHdln1-1FVAyxgBVTyEAWOwVA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"11111\",\r\n    \"name\": \"Thanh Tung tao laidcm\",\r\n    \"github\": \"linkgit2121\",\r\n    \"pastProject\": [\r\n        \r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/15",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"15"
+					]
 				}
 			},
 			"response": []
@@ -82,10 +175,29 @@
 		{
 			"name": "DeleteApplicationById",
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNjYyNjEsImlhdCI6MTY1ODI0ODI2MX0.tjVOXaGd7v1BT0YZzNyLEC61fKpxYzq7s_JUHpN9oMBCzdGmChtpDSbhgen5ffyvy8BzAjadAfVcpr-43-PeLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/16",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"16"
+					]
 				}
 			},
 			"response": []
@@ -93,10 +205,29 @@
 		{
 			"name": "ExportPDF",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyMzg5MzUsImlhdCI6MTY1ODIyMDkzNX0.LDBZ0cAaUqAzmNNJ9Xymr9VnOljC2ejq1ObC1EvtooRzu33E3mPHt0kP1yse5aGgpB3Q8ohdgUzxGyZOoX5nbA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/pdf",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"pdf"
+					]
 				}
 			},
 			"response": []
@@ -104,10 +235,30 @@
 		{
 			"name": "ExportPDFById",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNjYyNjEsImlhdCI6MTY1ODI0ODI2MX0.tjVOXaGd7v1BT0YZzNyLEC61fKpxYzq7s_JUHpN9oMBCzdGmChtpDSbhgen5ffyvy8BzAjadAfVcpr-43-PeLw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/applications/pdf/15",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"applications",
+						"pdf",
+						"15"
+					]
 				}
 			},
 			"response": []
@@ -115,10 +266,28 @@
 		{
 			"name": "GetAllPastProject",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNjYyNjEsImlhdCI6MTY1ODI0ODI2MX0.tjVOXaGd7v1BT0YZzNyLEC61fKpxYzq7s_JUHpN9oMBCzdGmChtpDSbhgen5ffyvy8BzAjadAfVcpr-43-PeLw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/pass-project",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"pass-project"
+					]
 				}
 			},
 			"response": []
@@ -126,10 +295,29 @@
 		{
 			"name": "GetPastProjectByApplicationId",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dW5nMUBnbWFpbC5jb20iLCJleHAiOjE2NTgyNjYyNjEsImlhdCI6MTY1ODI0ODI2MX0.tjVOXaGd7v1BT0YZzNyLEC61fKpxYzq7s_JUHpN9oMBCzdGmChtpDSbhgen5ffyvy8BzAjadAfVcpr-43-PeLw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8082/api/pass-project/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"pass-project",
+						"2"
+					]
 				}
 			},
 			"response": []
@@ -137,16 +325,56 @@
 		{
 			"name": "Register",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"thanhtung1\",\r\n    \"email\": \"tung1@gmail.com\",\r\n    \"password\": \"tung1\",\r\n    \"picture\": \"pic1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"register"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Login",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"tung1@gmail.com\",\r\n    \"password\": \"tung1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"login"
+					]
+				}
 			},
 			"response": []
 		}
