@@ -19,10 +19,12 @@ public class RegisterServiceImplement implements RegisterService {
     
     private final ReviewerMapper reviewerMapper;
     
+    
     @Transactional
     public Reviewer register(RegisterRequestDto registerRequestDto) {
            
         if (reviewerRepository.existsByEmail(registerRequestDto.getEmail())) return null;
+    
         return reviewerRepository.save(reviewerMapper.registerRequestToEntity(registerRequestDto));
     }
 }
