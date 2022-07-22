@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,26 +28,26 @@ import net.sparkminds.service.ApplicationService;
 import net.sparkminds.utils.PDFGenerator;
 
 @RestController
-@RequestMapping("api/applications")
+@RequestMapping("api")
 @RequiredArgsConstructor
 public class ApplicationController {
 
     private final ApplicationService applicationService;
 
-    @GetMapping
+    @GetMapping("/public/applications")
     public ResponseEntity<List<ApplicationResponseDto>> getApplication() {
         List<ApplicationResponseDto> applications = applicationService.getAllApplication();
         return ResponseEntity.ok().body(applications);
     };
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/applications/{id}")
     public ResponseEntity<?> getApplicationById(@PathVariable("id") Long id) {
         ApplicationResponseDto application = applicationService.getApplicationById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Application is not exist"));
         return ResponseEntity.ok().body(application);
     };
 
-    @PostMapping("/add-new")
+    @PostMapping("/common/application")
     public ResponseEntity<?> postNewApplication(@RequestBody @Valid ApplicationRequestDto applicationRequestDto) {
 
         ApplicationResponseDto newApplication = applicationService.createApplication(applicationRequestDto);
@@ -60,7 +59,7 @@ public class ApplicationController {
         return ResponseEntity.ok().body(newApplication);
     };
 
-    @PostMapping("/add-current")
+    @PostMapping("/common/application/add-new")
     public ResponseEntity<?> postCurrentApplication(@RequestBody @Valid ApplicationRequestDto applicationRequestDto) {
         applicationService.deleteApplicationWithEmail(applicationRequestDto.getEmail());
         ApplicationResponseDto newApplication = applicationService.createApplication(applicationRequestDto);
@@ -74,13 +73,13 @@ public class ApplicationController {
 //        return ResponseEntity.noContent().build();
 //    };
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/public/applications/{id}")
     public ResponseEntity<?> deleteApplication(@PathVariable("id") Long id) {
         applicationService.deleteApplicationWithId(id);
         return ResponseEntity.noContent().build();
     };
 
-    @GetMapping("/pdf")
+    @GetMapping("/public/applications/export")
     public void generatePdf(HttpServletResponse response) throws DocumentException, IOException {
 
         response.setContentType("application/pdf");
@@ -98,7 +97,7 @@ public class ApplicationController {
 
     }
 
-    @GetMapping("/pdf/{id}")
+    @GetMapping("/public/applications/export/{id}")
     public void generatePdfById(HttpServletResponse response, @PathVariable("id") Long id)
             throws DocumentException, IOException {
 
