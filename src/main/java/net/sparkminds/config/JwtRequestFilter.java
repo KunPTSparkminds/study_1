@@ -16,16 +16,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.RequiredArgsConstructor;
 import net.sparkminds.service.JwtUserDetailsService;
+import net.sparkminds.service.LogoutService;
 
 
 @Component
+@RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+  
+    private final JwtUserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+ 
+    private final JwtTokenUtil jwtTokenUtil;
+    
+
+    private final LogoutService logoutService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -66,7 +72,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // After setting the Authentication in the context, we specify
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                if(logoutService.checkJwtExistedRedis(jwtToken)) {
+                    SecurityContextHolder.getContext().setAuthentication(null);
+                } else {
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
+//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);    
+                
+                
             }
         }
         chain.doFilter(request, response);

@@ -21,7 +21,7 @@ public class LogoutController {
     public ResponseEntity<?> Logout(@RequestHeader("Authorization") String token) {
 
         logoutService.logout(token.split(" ")[1]);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(logoutService.logout(token.split(" ")[1]));
 
     }
 

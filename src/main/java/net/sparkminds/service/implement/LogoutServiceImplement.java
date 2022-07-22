@@ -1,10 +1,13 @@
 package net.sparkminds.service.implement;
 
+import java.util.Date;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import net.sparkminds.config.JwtTokenUtil;
 import net.sparkminds.service.LogoutService;
 import net.sparkminds.service.RedisService;
 
@@ -17,21 +20,21 @@ public class LogoutServiceImplement implements LogoutService {
     private final RedisService redisService;
     
     private final RedisTemplate<String, Object> template;
+    
+    private final JwtTokenUtil jwtTokenUtil;
     @Override
     public String logout(String jwt) {
         
-        redisService.cacheJwt(jwt);
+        Long timeout = jwtTokenUtil.getExpirationDateFromToken(jwt).getTime() - new Date().getTime();
         
-        return "Logout Success";
+        redisService.cacheJwt(jwt, timeout);
+        
+        return "Success Logout";
     }
 
     @Override
     public boolean checkJwtExistedRedis(String jwt) {
-        
-        if(template.opsForValue().get(jwt) == null) {
-            return false;
-        }
-        return true;
+        return template.opsForValue().get(jwt) != null;
     }
     
     
